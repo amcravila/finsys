@@ -17,7 +17,7 @@ export class TransactionsRepository {
     return TransactionsRepository.INSTANCE;
   }
 
-  create({ title, type, category, amount, }) {
+  create({ title, type, category, amount }) {
     const transaction = new Transaction();
 
     Object.assign(transaction, {
@@ -27,7 +27,7 @@ export class TransactionsRepository {
       amount,
       created_at: new Date(),
     });
-
+    
     this.transactions.push(transaction);
 
     return transaction;
@@ -35,5 +35,13 @@ export class TransactionsRepository {
 
   list() {
     return this.transactions;
+  }
+  
+  deleteById(id) {
+    const index = this.transactions.findIndex((transaction) => transaction.id === id);
+
+    this.transactions.splice(index, 1);
+
+    return;
   }
 }
