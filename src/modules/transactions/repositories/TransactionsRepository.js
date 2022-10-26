@@ -37,6 +37,19 @@ export class TransactionsRepository {
     return this.transactions;
   }
   
+  // updateById({ id, title, type, category, amount }) {
+  //   const index = this.transactions.findIndex((transaction) => transaction.id === id);
+
+  //   Object.assign(this.transactions[index], {
+  //     title,
+  //     type, 
+  //     category, 
+  //     amount
+  //   });
+
+  //   return this.transactions[index];
+  // }
+
   deleteById(id) {
     const index = this.transactions.findIndex((transaction) => transaction.id === id);
 

@@ -1,27 +1,30 @@
 // import { TransactionsRepository } from "../../repositories/TransactionsRepository.js";
 import { prisma } from "../../../../database/PrismaClient.js";
 
-export class CreateTransactionUseCase {
+export class UpdateTransactionUseCase {
   // constructor() {
   //   this.transactionsRepository = TransactionsRepository.getInstance();
   // }
 
-  async execute({ title, type, category, amount }) {
+async execute({ id, title, type, category, amount }) {
 
-    await prisma.$connect();
+  await prisma.$connect();
 
-    const transaction = await prisma.transactions.create({
+    const updatedTransaction = await prisma.transactions.update({
+      where: {
+        id,
+      },
       data: {
-        title,
-        type,
-        category,
-        amount,
-        created_at: new Date(),
+        title, 
+        type, 
+        category, 
+        amount
       },
     });
 
     await prisma.$disconnect();
 
-    return transaction;
+    return updatedTransaction;
   }
 }
+
